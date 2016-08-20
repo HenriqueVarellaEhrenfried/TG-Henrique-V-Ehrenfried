@@ -20,6 +20,14 @@ function yesCheck() {
         document.getElementById('ies').style.display= 'block';
     }
 };
+function analyseText(text){
+    var python = spawn('python', ["TG.py", text])   // TODO: Finish to build this part!!
+    python.stdout.on('data', function (temp_result) {    // register one or more handlers
+        global.pyResult = "" + temp_result
+        console.log(global.pyResult);
+        alert(text)
+    });
+}
 function triggerPython(){
     if (document.getElementById('test1').checked){
         var file = $("#file_uploader").val()
@@ -29,11 +37,7 @@ function triggerPython(){
                 if (err) {
                     return console.log(err);
                 }
-                var python = spawn('python', ["TG.py", file_read])   
-                python.stdout.on('data', function (temp_result) {    // register one or more handlers
-                    global.pyResult = "" + temp_result
-                    console.log(global.pyResult);
-                });            
+                 analyseText(file_read)          
             });
         }
         else{
@@ -43,8 +47,8 @@ function triggerPython(){
     }
     else{
         var text = $("#textarea1").val()
+        analyseText(text)
     }
-    console.log(text)
 }
 // function get_values() {
 //     var selectedYears = $('#year_select').val();
