@@ -11,13 +11,13 @@ $(document).ready(function (){
 })
 function yesCheck() {
     if (document.getElementById('test1').checked) {
-        document.getElementById('ies').style.display = 'none';
-        document.getElementById('state').style.display = 'block';
+        document.getElementById('textarea').style.display = 'none';
+        document.getElementById('uploader').style.display = 'block';
 
     } 
     else {
-        document.getElementById('state').style.display = 'none';
-        document.getElementById('ies').style.display= 'block';
+        document.getElementById('uploader').style.display = 'none';
+        document.getElementById('textarea').style.display= 'block';
     }
 };
 function analyseText(text){
@@ -50,23 +50,3 @@ function triggerPython(){
         analyseText(text)
     }
 }
-// function get_values() {
-//     var selectedYears = $('#year_select').val();
-    
-//     var selectedStates = []; 
-//     $('#state_select :selected').each(function(i, selected){ 
-//       selectedStates[i] = $(selected).text(); 
-//     });
-
-//     var selectedIes = []; 
-//     $('#ies_select :selected').each(function(i, selected){ 
-//       selectedIes[i] = $(selected).text(); 
-//     });
-
-//     var selectedQueries = $('#query_select').val();
-
-//     console.log(selectedYears);
-//     console.log(selectedStates);
-//     console.log(selectedIes);
-//     console.log(selectedQueries);
-// }
