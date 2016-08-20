@@ -22,7 +22,7 @@
 
             <form action="#">
               <p>
-                <input name="group1" type="radio" id="test1" />
+                <input name="group1" type="radio" id="test1" checked/>
                 <label for="test1">Import File</label>
               </p>
               <p>
@@ -41,7 +41,7 @@
                   <input type="file">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" placeholder="Upload a file">
+                  <input id="file_uploader" class="file-path validate" type="text" placeholder="Upload a file">
                 </div>
               </div>
             </form>
@@ -50,13 +50,13 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Textarea</label>
+                    <label for="textarea1">Software to be build</label>
                   </div>
                 </div>
               </form>
             </div>
             <div id="continue_button"  class="card-action">
-              <a class="btn waves-effect waves-light right">Continue</a>
+              <a class="btn waves-effect waves-light right" onclick="triggerPython()">Continue</a>
             </div>
           </div>
           
@@ -108,15 +108,10 @@
 
 
 
-
-
-
-
     <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="hammer.min.js"></script>
-    <script type="text/javascript" src="materialize.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   </body>
 
   <script>
