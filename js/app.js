@@ -8,6 +8,7 @@ $(document).ready(function (){
     $('#textarea1').val('New Text');
     $('#textarea1').trigger('autoresize');
     $('select').material_select();
+    $('.progress').hide();
 })
 function yesCheck() {
     if (document.getElementById('test1').checked) {
@@ -21,9 +22,11 @@ function yesCheck() {
     }
 };
 function analyseText(text){
+    $('.progress').show();
     var python = spawn('python', ["TG.py", text])   // TODO: Finish to build this part!!
     python.stdout.on('data', function (temp_result) {    // register one or more handlers
         global.pyResult = "" + temp_result
+        $('.progress').hide();
         console.log(global.pyResult);
         alert(text)
     });
