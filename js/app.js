@@ -5,6 +5,7 @@ var util  = require('util'),
 global.pyResult
 global.datahandled
 
+
 Array.prototype.contains = function(element){
     return this.indexOf(element) > -1;
 };
@@ -31,18 +32,6 @@ function yesCheck() {
     }
 };
 
-function getAllActors(json){
-	var actors=[]
-	json.forEach(function(j){
-    // if (!(actors.contains(j))){
-        actors.push(j.actor.capitalizeFirstLetter())
-    // }
-
-    	
-	})
-	return actors
-}
-
 function extractData(json){
     var data = []
     var index = 1
@@ -65,15 +54,8 @@ function extractData(json){
         index=index+1
       }
     })
+    global.datahandled = data
     return (data)
-}
-
-function getAllUseCase(json){
-	var useCases=[]
-	json.forEach(function(j){
-		useCases.push(j.action+" "+j.complement)
-	})
-	return useCases
 }
 
 function analyseText(text){
@@ -85,8 +67,6 @@ function analyseText(text){
         $('#show_result').show();
         console.log(global.pyResult);
         datas = extractData(global.pyResult)
-        actors = getAllActors(global.pyResult);
-        useCases = getAllUseCase(global.pyResult);
 
         var sel = document.getElementById('use_cases');
         var fragment = document.createDocumentFragment();
@@ -98,7 +78,6 @@ function analyseText(text){
             fragment.appendChild(opt);
         });
         sel.appendChild(fragment);
-
         $('select').material_select();
     });
 }
@@ -124,16 +103,28 @@ function triggerPython(){
         analyseText(text)
     }
 }
-// TODO: Make this function create a <li> with class collection-item and use cases from an actor
-function displayUseCases(){
+
+function displayUseCases(ind){
     var sel = document.getElementById('uc');
     var fragment = document.createDocumentFragment();
-    var datas = global.datahandled
+    var datas = global.datahandled[ind-1].action
+    var id = 1
+    $('.collection-item').remove()
     datas.forEach(function(data, index) {
-        var opt = document.createElement('option');
-        opt.innerHTML = data.label;
-        opt.value = data.id;
+        var opt = document.createElement('li');
+        opt.innerHTML = data;
+        opt.className = "collection-item";
+        opt.id = "cl-itm"
+        opt.value = id;
+        id = id + 1;
         fragment.appendChild(opt);
     });
     sel.appendChild(fragment);
+}
+
+function reset(){
+    $('option').remove();
+    $('select').material_select();
+    $('.collection-item').remove()
+    $('#show_result').hide();
 }

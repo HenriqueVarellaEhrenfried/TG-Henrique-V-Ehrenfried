@@ -76,18 +76,21 @@
             <span class="card-title">Possible use cases</span>
                 <div class="row">
                   <div class="input-field col s12">
-                    <select id="use_cases">
+                    <select id="use_cases" onchange="displayUseCases(this.value)">
                       <option value="" disabled selected>Choose an actor</option>
                     </select>
                     <label>Actor</label>
                   </div>
                 </div>
-                <div>
+                <div id="duc">
                  <label>Use cases</label> 
                  <ul class="collection" id="uc">
 
                   </ul>
                 </div>
+                <div id="continue_button"  class="card-action">
+                  <a class="btn waves-effect waves-light right" onclick="reset()">Try another problem</a>
+              </div>
             </div>
           </div>
         </div>
