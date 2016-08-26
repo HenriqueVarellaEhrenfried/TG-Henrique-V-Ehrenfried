@@ -4,6 +4,7 @@ var util  = require('util'),
 
 global.pyResult
 global.datahandled
+global.pythonCall = null
 
 
 Array.prototype.contains = function(element){
@@ -20,6 +21,21 @@ $(document).ready(function (){
     $('.progress').hide();
     $('#show_result').hide();
 })
+function selectPythonCall(){
+    if (document.getElementById('config1').checked){
+        return 'python'
+    }
+    else{
+        if(document.getElementById('config2').checked){
+            return 'python3'
+        }
+        else{
+            alert('Please set how python 3.5.X is called in your system')
+            return 'none'
+        }
+    }
+
+}
 function yesCheck() {
     if (document.getElementById('test1').checked) {
         document.getElementById('textarea').style.display = 'none';
@@ -60,7 +76,8 @@ function extractData(json){
 
 function analyseText(text){
     $('.progress').show();
-    var python = spawn('python', ["TG.py", text])   // TODO: Finish to build this part!!
+    var python = selectPythonCall()
+    var python = spawn(python, ["TG.py", text])   // TODO: Finish to build this part!!
     python.stdout.on('data', function (temp_result) {    // register one or more handlers
         global.pyResult = JSON.parse("" + temp_result)
         $('.progress').hide();
@@ -82,25 +99,31 @@ function analyseText(text){
     });
 }
 function triggerPython(){
-    if (document.getElementById('test1').checked){
-        var file = $("#file_uploader").val()
-        var file_splitted = file.split('.')
-        if (file_splitted[file_splitted.length-1]=="txt"){
-            fs.readFile(file, 'utf8', function (err,file_read) {
-                if (err) {
-                    return console.log(err);
-                }
-                 analyseText(file_read)          
-            });
+    var enviroment = selectPythonCall()
+    if (enviroment!='none'){
+        if (document.getElementById('test1').checked){
+            var file = $("#file_uploader").val()
+            var file_splitted = file.split('.')
+            if (file_splitted[file_splitted.length-1]=="txt"){
+                fs.readFile(file, 'utf8', function (err,file_read) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    analyseText(file_read)          
+                });
+            }
+            else{
+                alert("File format is incorrect, please upload a .txt file")
+            }     
+            
         }
         else{
-            alert("File format is incorrect, please upload a .txt file")
-        }     
-        
+            var text = $("#textarea1").val()
+            analyseText(text)
+        }
     }
     else{
-        var text = $("#textarea1").val()
-        analyseText(text)
+        alert("Please set how Python 3.5.X is called in your system")
     }
 }
 
