@@ -5,6 +5,7 @@ var util  = require('util'),
 global.pyResult
 global.datahandled
 global.pythonCall = null
+global.selected = {} //Hash that the key is the number of actor of datahandled+1 and the value is the selected parameters
 
 
 Array.prototype.contains = function(element){
@@ -15,7 +16,7 @@ String.prototype.capitalizeFirstLetter = function() {
 }
 
 $(document).ready(function (){
-    $('#textarea1').val('I like pizza');
+    $('#textarea1').val('I like pizza. I like chocolate. I like to play games. Harry is a wizard');
     $('#textarea1').trigger('autoresize');
     $('select').material_select();
     $('.progress').hide();
@@ -70,7 +71,10 @@ function extractData(json){
         index=index+1
       }
     })
-    global.datahandled = data
+    global.datahandled = data    
+    for (var i = 0; i < global.datahandled.length; i++){
+        global.selected[i+1] = [];
+    }
     return (data)
 }
 
@@ -130,6 +134,7 @@ function set_active(){
     console.log()
 }
 function displayUseCases(ind){
+    console.log(global.selected)
     var sel = document.getElementById('uc');
     var fragment = document.createDocumentFragment();
     var datas = global.datahandled[ind-1].action
@@ -138,13 +143,29 @@ function displayUseCases(ind){
     datas.forEach(function(data, index) {
         var opt = document.createElement('li');
         opt.innerHTML = data;
-        opt.className = "collection-item";
+
+        var arrIndx = global.selected[String(ind)].indexOf(String(id))
+        if (arrIndx > -1) {
+            opt.className = "collection-item active";
+        }
+        else{
+             opt.className = "collection-item";
+        }        
         opt.onclick = function () {
             var elClass = this.className
             if(elClass.split(" ").length > 1){
+                var value = this.getAttribute('value');
+                var actor = $('select').val()
+                var arrInd = global.selected[String(actor)].indexOf(value)
+                if (arrInd > -1) {
+                    global.selected[String(actor)].splice(arrInd, 1)
+                }
                 this.className = "collection-item"
             }
             else{
+                var value = this.getAttribute('value');
+                var actor = $('select').val()
+                global.selected[String(actor)].push(value)
                 this.className+=" active"
             }
         };
