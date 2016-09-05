@@ -2,6 +2,7 @@ var fs = require('fs')
 var util  = require('util'),
     spawn = require('child_process').spawn
 
+
 global.pyResult
 global.datahandled
 global.pythonCall = null
@@ -182,4 +183,26 @@ function reset(){
     $('select').material_select();
     $('.collection-item').remove()
     $('#show_result').hide();
+}
+function createXML(){
+    var ind = 1
+    var xmlUC = "<Software>"
+    var total = Object.keys(global.selected).length    
+    var j = 0;
+    while (ind <= total){
+        var selectedUC = global.selected[String(ind)]
+        xmlUC+="\n\t<Actor>\n\t\t"+global.datahandled[ind-1].actor+"\n\t</Actor>"
+        while(j < selectedUC.length){            
+            xmlUC+="\n\t<UseCase>\n\t\t"+global.datahandled[ind-1].action[selectedUC[j]-1]+"\n\t</UseCase>"
+            j++
+        }
+        j = 0;
+        ind++
+    } 
+    xmlUC+="\n</Software>"
+    $.getScript("js/download.js", function(){
+
+        download(xmlUC,"SoftwareUseCases.xml","text/plain")
+
+    });
 }
