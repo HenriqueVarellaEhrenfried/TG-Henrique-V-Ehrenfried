@@ -17,7 +17,7 @@ String.prototype.capitalizeFirstLetter = function() {
 }
 
 $(document).ready(function (){
-    $('#textarea1').val('I like pizza. I like chocolate. I like to play games. Harry is a wizard');
+    $('#textarea1').val('');
     $('#textarea1').trigger('autoresize');
     $('select').material_select();
     $('.progress').hide();
