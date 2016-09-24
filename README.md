@@ -1,38 +1,35 @@
-# electron-quick-start
+# TG-Henrique-V-Ehrenfried
 
-**Clone and run for a quick way to see an Electron in action.**
+## First usage
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start) within the Electron documentation.
-
-**Use this app along with the [Electron API Demos](http://electron.atom.io/#get-started) app for API code examples to help you get started.**
-
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start).
-
-## To Use
-
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+To clone and run this repository you'll need [Git](https://git-scm.com), [Python 3.X](https://www.python.org/downloads/)   and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/HenriqueVarellaEhrenfried/TG-Henrique-V-Ehrenfried.git
+# Install pip
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
 # Go into the repository
-cd electron-quick-start
+cd TG-Henrique-V-Ehrenfried
 # Install dependencies and run the app
+pip install spacy
+pip install inflection
+pip install nltk
+sputnik --name spacy --repository-url http://index.spacy.io install en==1.1.0
+python
+  import nltk
+  nltk.download()
+  #Install wordnet and wordnetic
 npm install && npm start
 ```
-
-Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
+## Usage
+After installed all you need to do to start the application is go to directory where you cloned this app and run
+```bash
+npm start
+```
 
 ## Other Example Apps
 
-For more example apps, see the
-[list of boilerplates](http://electron.atom.io/community/#boilerplates)
-created by the awesome electron community.
 
 #### License [CC0 (Public Domain)](LICENSE.md)
