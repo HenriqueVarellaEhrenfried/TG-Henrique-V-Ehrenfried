@@ -88,9 +88,14 @@ class Sentence:
                             string_subj_temp+=sub
                         s[0] = string_subj_temp
                     else:
+                        owner=globalSubject[globalIndexSubject-1]
+                        if owner.endswith('s'):
+                            owner = owner + '\' '
+                        else:
+                            owner = owner + '\'s '
                         temp_subj = s[0]
                         array_list = temp_subj.split()
-                        array_list[0] = owner
+                        array_list[0] = owner + ' '
                         string_subj_temp=''
                         for sub in array_list:
                             string_subj_temp+=sub
